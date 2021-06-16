@@ -82,7 +82,8 @@ fi
 elif [ $op -eq 2 ];then
 
 echo " ..................... INSTALANDO ................>>  waiting.."
-
+sudo apt-cache search  metasploit-framework
+sudo apt-get install metasploit-framework
 clear
 echo " ..................... INSTALAdO! ................>>  OK"
 sleep 3;
