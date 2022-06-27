@@ -1,12 +1,12 @@
 
 #!/bin/bash
 
-echo "_--------------------------------------------------------_"
-echo "_-----------           J.A.R.V.S        -----------------_"
-echo "_........................................................_"
-echo "			     @authos:jonas Medeiros Andrade ##"
-echo "			     @github.com:jonas-andrade/jarvis.git"
-echo "			     @version: Jarvis/1.0 %16/06/2021%19:17h"
+echo "_--------------------------------------------------------._"
+echo "_-----------           F.L.I.P.P.E.R       ---------------_"
+echo "_........................................................._"
+echo "			     @author:jonas Medeiros Andrade ##"
+echo "			     @github.com:jonas-andrade/flipper.git"
+echo "			     @version: Flipper/1.0 %16/06/2021%19:17h"
 echo "\n"
 echo "1 --> J2dex/Jd-GUI"
 echo "2 --> MSF/msfconsole/msfvenom"
